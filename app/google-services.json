@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "678116887674",
+    "firebase_url": "https://basicchat-254fa.firebaseio.com",
+    "project_id": "basicchat-254fa",
+    "storage_bucket": "basicchat-254fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678116887674:android:b1287bd0a80449f1",
+        "android_client_info": {
+          "package_name": "com.example.rahulkapoor.basicchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678116887674-6ve1j4oeljpommdnlmk7co5k5c4jddqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rahulkapoor.basicchat",
+            "certificate_hash": "41cd71c4ead4bff217d13e9016d425098214862d"
+          }
+        },
+        {
+          "client_id": "678116887674-53nv350o2apel4cltt6fs3rt6u3ids7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY3PyFfMeJu4wTUErk4N77AIjJLxW61Bg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678116887674-53nv350o2apel4cltt6fs3rt6u3ids7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
