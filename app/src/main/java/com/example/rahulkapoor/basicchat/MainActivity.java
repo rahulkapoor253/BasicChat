@@ -87,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
 //                }
 
                 if (dataSnapshot.getChildrenCount() > 0) {
+
+                    //clear the list before refreshing it;
+                    list.clear();
+
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         // TODO: handle the post
                         Log.i("snapshot_data", postSnapshot.getValue().toString());
@@ -95,12 +99,14 @@ public class MainActivity extends AppCompatActivity {
                         Date msgTime = new Date((long) postSnapshot.child("messageTime").getValue());
                         list.add(msgUser + "," + msgTime.toString() + "," + msgText);
                         //notify the adapter for change;
-                        myAdapter.notifyDataSetChanged();
-
 
                     }
 
                 }
+
+                myAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override

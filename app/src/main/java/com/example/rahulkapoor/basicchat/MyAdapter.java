@@ -2,6 +2,7 @@ package com.example.rahulkapoor.basicchat;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,14 +31,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull final MyAdapter.MyViewHolder holder, final int position) {
 
         String[] messageData = messageList.get(position).split(",");//split on comma with user, time, text;
+        Log.i("message_data", messageData.toString());
         holder.tvUser.setText(messageData[0]);
         holder.tvTime.setText(messageData[1]);
-        holder.tvText.setText(messageData[1]);
+        holder.tvText.setText(messageData[2]);
 
     }
 
     @Override
     public int getItemCount() {
+        Log.i("list_size", messageList.size() + "");
         return messageList.size();
     }
 
