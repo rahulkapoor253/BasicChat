@@ -34,8 +34,8 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/fab"
@@ -45,7 +45,7 @@
         android:divider="@android:color/transparent">
 
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 
 </RelativeLayout>

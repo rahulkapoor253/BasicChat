@@ -4,16 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int SIGN_IN_REQUEST_CODE = 1;
     private FirebaseAuth mAuth;
     private Button fab;
-    private FirebaseListAdapter<ChatMessage> adapter;
     private ArrayList<String> list = new ArrayList<>();
-    private ArrayAdapter<String> listAdapter;
-    private ListView messageList;
     private DatabaseReference reference;
+    private RecyclerView recyclerView;
+    private MyAdapter myAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
             //displayChat();
         }
 
-        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        messageList = (ListView) findViewById(R.id.listView);
-        messageList.setAdapter(listAdapter);
 
         reference = FirebaseDatabase.getInstance().getReference();
+
+        //setting up the adapter and list view;
+        myAdapter = new MyAdapter(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(myAdapter);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
                         String msgUser = (String) postSnapshot.child("messageUser").getValue();
                         String msgText = (String) postSnapshot.child("messageText").getValue();
                         Date msgTime = new Date((long) postSnapshot.child("messageTime").getValue());
-                        list.add(msgUser);
-                        list.add(msgText);
-                        list.add(msgTime.toString());
-                        listAdapter.notifyDataSetChanged();
+                        list.add(msgUser + "," + msgTime.toString() + "," + msgText);
+                        //notify the adapter for change;
+                        myAdapter.notifyDataSetChanged();
+
 
                     }
 
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         fab = (Button) findViewById(R.id.fab);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_list);
 
     }
 
@@ -135,43 +137,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
-
-//    /**
-//     * display all chat messages;
-//     */
-//    private void displayChat() {
-//
-//        Query query = reference;
-//        FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
-//                .setQuery(query, ChatMessage.class)
-//                .setLayout(android.R.layout.simple_list_item_1)
-//                .build();
-//
-//
-//        adapter = new FirebaseListAdapter<ChatMessage>(options) {
-//            @Override
-//            protected void populateView(final View v, final ChatMessage model, final int position) {
-//
-//                TextView tvMessageText, tvMessageTime, tvUser;
-//                //populate items in view;
-//                tvMessageText = (TextView) v.findViewById(R.id.message_text);
-//                tvMessageTime = (TextView) v.findViewById(R.id.message_time);
-//                tvUser = (TextView) v.findViewById(R.id.message_user);
-//
-//                tvMessageText.setText(model.getMessageText());
-//                tvUser.setText(model.getMessageUser());
-//                tvMessageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
-//
-//            }
-//
-//        };
-//
-//        Log.i("adapter", adapter.getCount() + "");
-//        //set the filled adapter;
-//        messageList.setAdapter(adapter);
-//
-//
-//    }
 
 
 }
